@@ -20,6 +20,7 @@
 
   <!-- Custom styles for this template -->
   <link href="http://localhost:10004/wp-content/themes/Myblog/css/clean-blog.min.css" rel="stylesheet">
+
   <?php wp_head(); ?>
 </head>
 
@@ -72,11 +73,16 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
+      <?php if (have_posts()): ?>
+    
         <div class="post-preview">
           <a href="post.html">
             <h2 class="post-title">
-              <?php $title = the_title('■', '●', false); ?>
-              <?php echo str_replace('新しい','古い',$title); ?>
+
+            <?php while (have_posts()): the_post(); ?>
+              <?php the_title(); ?>
+            <?php endwhile; ?>
+
             </h2>
             <h3 class="post-subtitle">
               Problems look mighty small from 150 miles up
@@ -130,6 +136,9 @@
         <div class="clearfix">
           <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
         </div>
+        <?php else: ?>
+          <p>記事が見つかりませんでした。</p>
+        <?php endif; ?>
       </div>
     </div>
   </div>
@@ -179,6 +188,7 @@
 
   <!-- Custom scripts for this template -->
   <script src="js/clean-blog.min.js"></script>
+
   <?php wp_footer(); ?>
 </body>
 
